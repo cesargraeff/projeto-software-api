@@ -6,6 +6,11 @@ use Slim\Http\Response;
 use Curriculo\Controller\CursoController;
 use Curriculo\Controller\AlunoController;
 use Curriculo\Controller\CurriculoController;
+use Curriculo\Controller\DisciplinaController;
+use Curriculo\Controller\LoginController;
+use Curriculo\Controller\MatriculaController;
+use Curriculo\Controller\RequisitoController;
+use Curriculo\Controller\UsuarioController;
 
 return function (App $app) {
 
@@ -36,11 +41,13 @@ return function (App $app) {
             
             $app->group(
                 '/curriculos', function (App $app) {
-    
+
+                    $app->get('/{id}/aluno/{id}', CurriculoController::class.':visualizar');
                     $app->get('', CurriculoController::class.':listar');
                     $app->get('/{id}', CurriculoController::class.':buscar');
                     $app->post('', CurriculoController::class.':adicionar');
                     $app->put('/{id}', CurriculoController::class.':editar');
+                    
                 }
             );
 
@@ -51,6 +58,56 @@ return function (App $app) {
                     $app->get('/{id}', CursoController::class.':buscar');
                     $app->post('', CursoController::class.':adicionar');
                     $app->put('/{id}', CursoController::class.':editar');
+                }
+            );
+
+            $app->group(
+                '/disciplina', function (App $app) {
+    
+                    $app->get('', DisciplinaController::class.':listar');
+                    $app->get('/{id}', DisciplinaController::class.':buscar');
+                    $app->post('', DisciplinaController::class.':adicionar');
+                    $app->put('/{id}', DisciplinaController::class.':editar');
+                }
+            );
+
+            $app->group(
+                '/logins', function (App $app) {
+    
+                    $app->get('', LoginController::class.':listar');
+                    $app->get('/{id}', LoginController::class.':buscar');
+                    $app->post('', LoginController::class.':adicionar');
+                    $app->put('/{id}', LoginController::class.':editar');
+                }
+            );
+
+            $app->group(
+                '/matriculas', function (App $app) {
+    
+                    $app->get('', MatriculaController::class.':listar');
+                    $app->get('/{id}', MatriculaController::class.':buscar');
+                    $app->post('', MatriculaController::class.':adicionar');
+                    $app->put('/{id}', MatriculaController::class.':editar');
+                }
+            );
+
+            $app->group(
+                '/requisitos', function (App $app) {
+    
+                    $app->get('', RequisitoController::class.':listar');
+                    $app->get('/{id}', RequisitoController::class.':buscar');
+                    $app->post('', RequisitoController::class.':adicionar');
+                    $app->put('/{id}', RequisitoController::class.':editar');
+                }
+            );
+
+            $app->group(
+                '/usuarios', function (App $app) {
+    
+                    $app->get('', UsuarioController::class.':listar');
+                    $app->get('/{id}', UsuarioController::class.':buscar');
+                    $app->post('', UsuarioController::class.':adicionar');
+                    $app->put('/{id}', UsuarioController::class.':editar');
                 }
             );
         }
