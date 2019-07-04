@@ -63,4 +63,16 @@ class CurriculoController extends Controller
         ]);
     }
 
+
+    public function visualizar(Request $request, Response $response, $args)
+    {
+        $id = (int) $args['id'];
+        $res = $this->model->visualizar($id);
+
+        return $response->withJson([
+            'status' => 'success',
+            'data' => $res
+        ]);
+    }
+
 }

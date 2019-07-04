@@ -18,48 +18,10 @@ class LoginController extends Controller
         parent::__construct($ci, (new LoginModel($ci)));
     }
 
-
-    public function adicionar(Request $request, Response $response)
-    {
-        $data = $request->getParsedBody();
-
-        $id = $this->model->adicionar($data);
-
-        return $response->withStatus(201)->withJson([
-            'status' => 'success',
-            'id' => $id
-        ]);
-    }
-
-    public function editar(Request $request, Response $response, array $args)
-    {
-        $id = (int) $args['id'];
-        $data = $request->getParsedBody();
-
-        $this->model->editar($id, $data);
+    public function login(Request $request, Response $response){
 
         return $response->withJson([
             'status' => 'success'
-        ]);
-    }
-
-    public function buscar(Request $request, Response $response, array $args)
-    {
-        $res = $this->model->buscar($args['id']);
-
-        return $response->withJson([
-            'status' => 'success',
-            'data' => $res
-        ]);
-    }
-
-    public function listar(Request $request, Response $response)
-    {
-        $res = $this->model->listar();
-
-        return $response->withJson([
-            'status' => 'success',
-            'data' => $res
         ]);
     }
 

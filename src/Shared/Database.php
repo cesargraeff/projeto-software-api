@@ -16,7 +16,7 @@ class Database
         $this->settings = $settings;
     }
 
-    public function __invoke()
+    public function getConnection()
     {
 
         if (!$this->connection) {

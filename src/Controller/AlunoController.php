@@ -18,37 +18,16 @@ class AlunoController extends Controller
         parent::__construct($ci, (new AlunoModel($ci)));
     }
 
-    private $validators = [
-        'nome' => V::length(3, 100)->notBlank(),
-        'cpf' => V::numeric(),
-        'endereco' => V::length(3,50),
-        'numero' => V::numeric(),
-        'bairro' => V::length(3,50),
-        'municipio' => V::numeric()
-    ];
-
     public function adicionar(Request $request, Response $response)
     {
-        
-        $validator = $this->ci->validator->validate($request, $this->validators);
-        
-        if ($validator->isValid()) {
+        $data = $request->getParsedBody();
 
-            $data = $request->getParsedBody();
+        $id = $this->model->adicionar($data);
 
-            $id = $this->model->adicionar($data);
-
-            return $response->withStatus(201)->withJson([
-                'status' => 'success',
-                'id' => $id
-            ]);
-
-        } else {
-            $response->withStatus(201)->withJson([
-                'status' => 'error',
-                'errors' => $validator->getErrors()
-            ]);
-        }
+        return $response->withStatus(201)->withJson([
+            'status' => 'success',
+            'id' => $id
+        ]);
     }
 
     public function editar(Request $request, Response $response, array $args)

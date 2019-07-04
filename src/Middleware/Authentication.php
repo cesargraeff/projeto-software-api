@@ -45,10 +45,6 @@ class Authentication
                     
                     $usuario = $db->fetch(PDO::FETCH_ASSOC);
 
-                    if($usuario['permissao'] == null){
-                        $usuario['permissao'] = '{}';
-                    }
-
                     $this->ci['usuario'] = new Usuario(
                         $usuario['id'],
                         $usuario['nome'],

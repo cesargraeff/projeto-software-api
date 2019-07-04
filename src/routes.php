@@ -26,8 +26,10 @@ return function (App $app) {
         );
     });
 
+    $app->post('/login', LoginController::class.':login');
+
     $app->group(
-        '/api/{version}', function (App $app) {
+        '/{version}', function (App $app) {
 
             $app->group(
                 '/alunos', function (App $app) {
@@ -42,7 +44,7 @@ return function (App $app) {
             $app->group(
                 '/curriculos', function (App $app) {
 
-                    $app->get('/{id}/aluno/{id}', CurriculoController::class.':visualizar');
+                    $app->get('/aluno/{id}', CurriculoController::class.':visualizar');
                     $app->get('', CurriculoController::class.':listar');
                     $app->get('/{id}', CurriculoController::class.':buscar');
                     $app->post('', CurriculoController::class.':adicionar');
@@ -62,22 +64,12 @@ return function (App $app) {
             );
 
             $app->group(
-                '/disciplina', function (App $app) {
+                '/disciplinas', function (App $app) {
     
                     $app->get('', DisciplinaController::class.':listar');
                     $app->get('/{id}', DisciplinaController::class.':buscar');
                     $app->post('', DisciplinaController::class.':adicionar');
                     $app->put('/{id}', DisciplinaController::class.':editar');
-                }
-            );
-
-            $app->group(
-                '/logins', function (App $app) {
-    
-                    $app->get('', LoginController::class.':listar');
-                    $app->get('/{id}', LoginController::class.':buscar');
-                    $app->post('', LoginController::class.':adicionar');
-                    $app->put('/{id}', LoginController::class.':editar');
                 }
             );
 

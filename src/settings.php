@@ -9,7 +9,7 @@ return [
             'port' => 3050,
             'user' => 'user',
             'pass' => '',
-            'database' => 'Curriculo'
+            'database' => 'projeto'
         ],
     ],
 ];

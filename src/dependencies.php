@@ -14,12 +14,10 @@ return function (App $app) {
         return new Database($settings);
     };
 
-    $container['errorHandler'] = function($c){
-        return new ErrorHandler();
-    };
-
     $container['logger'] = function($c){
         return new Logger();
     };
+
+    $container['errorHandler'] = new ErrorHandler($container);
 
 };
